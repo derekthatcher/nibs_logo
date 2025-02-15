@@ -1,0 +1,21 @@
+body,
+#container {
+  text-align: center;
+  margin: 20px;
+  font-family: monospace;
+  font-size: 1.1em;
+  /*background-color: #99F;*/
+}
+
+#container {
+  margin: 10px auto;
+}
+#title{
+  font-size: 1.4em;
+  margin-bottom:10vh;
+}
+button {
+  font-family: monospace;
+  padding: 5px 10px;
+  margin-bottom:10vh;
+}
