@@ -3,7 +3,7 @@
  Version 0.1
  Derek Thatcher 2025
 ************************************************************/
-const paths = document.querySelectorAll("svg .cls-1"); // Select all paths inside the SVG
+const paths = document.querySelectorAll("svg #Layer_2 .cls-3"); // Select all paths inside the SVG
 let mode = "drag"; // Default mode
 const toggleButton = document.getElementById("toggleMode");
 let isDragging = false, isRotating = false;
@@ -19,12 +19,21 @@ toggleButton.addEventListener("click", () => {
 function startInteraction(event) {
     const isTouch = event.type.startsWith("touch");
     const evt = isTouch ? event.touches[0] : event;
-    const path = evt.target.closest(".cls-1");
+    const path = evt.target.closest(".cls-3");
     if (!path) return;
 
     selectedElement = path;
     startX = evt.clientX;
     startY = evt.clientY;
+    // Get the bounding box of the path
+    const bbox = selectedElement.getBBox();
+
+    // Calculate the center coordinates
+    const centerX = bbox.x + bbox.width / 2;
+    const centerY = bbox.y + bbox.height / 2;
+
+    // Set the transform-origin
+    selectedElement.style.transformOrigin = `${centerX}px ${centerY}px`;
 
     const transform = selectedElement.getAttribute("transform") || "translate(0,0) rotate(0)";
     const match = transform.match(/translate\((-?\d+\.?\d*),\s*(-?\d+\.?\d*)\) rotate\((-?\d+\.?\d*)\)/);
@@ -119,7 +128,7 @@ const download = () => {
 
         // trigger a synthetic download operation with a temporary link
         const a = document.createElement('a');
-        a.download = 'image.png';
+        a.download = 'NiBS.png';
         document.body.appendChild(a);
         a.href = canvas.toDataURL();
         a.click();
