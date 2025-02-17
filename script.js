@@ -84,7 +84,7 @@ const createStyleElementFromCSS = () => {
     // JSFiddle's custom CSS is defined in the second stylesheet file
     const sheet = document.styleSheets[1];
 
-    const styleRules = [];
+    const styleRules = ["svg {transform: scale(1); background-color: #FFF;}"];
     for (let i = 0; i < sheet.cssRules.length; i++)
         styleRules.push(sheet.cssRules.item(i).cssText);
 
@@ -118,11 +118,11 @@ const download = () => {
         const bbox = svg.getBBox();
 
         const canvas = document.createElement('canvas');
-        canvas.width = bbox.width;
-        canvas.height = bbox.height;
+        canvas.width = 3*bbox.width;
+        canvas.height = 3*bbox.height;
 
         const context = canvas.getContext('2d');
-        context.drawImage(img, 0, 0, bbox.width, bbox.height);
+        context.drawImage(img, 0, 0, 3*bbox.width, 3*bbox.height);
 
         URL.revokeObjectURL(url);
 
