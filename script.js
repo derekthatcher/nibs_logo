@@ -123,7 +123,9 @@ const download = () => {
 
         const context = canvas.getContext('2d');
         context.drawImage(img, 0, 0, 3*bbox.width, 3*bbox.height);
-
+        //Add nibs url
+        context.font = "40px Arial";
+        context.fillText("nibs.nz",3*bbox.width -180,3*bbox.height -70);
         URL.revokeObjectURL(url);
 
         // trigger a synthetic download operation with a temporary link
