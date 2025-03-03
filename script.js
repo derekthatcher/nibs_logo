@@ -10,6 +10,7 @@ let isDragging = false, isRotating = false;
 let startX, startY, startAngle = 0;
 let currentX = 0, currentY = 0, currentAngle = 0;
 let selectedElement = null;
+const svg = document.getElementById("nibs_svg");
 
 toggleButton.addEventListener("click", () => {
     mode = (mode === "drag") ? "rotate" : "drag";
@@ -64,7 +65,10 @@ function moveInteraction(event) {
         let dy = evt.clientY - startY;
         let newX = currentX + dx;
         let newY = currentY + dy;
-        selectedElement.setAttribute("transform", `translate(${newX},${newY}) rotate(${currentAngle})`);
+        // add bounds
+        if(evt.clientX > 0 && evt.clientX < svg.width.baseVal.value && evt.clientY > 0 && evt.clientY < svg.height.baseVal.value){
+            selectedElement.setAttribute("transform", `translate(${newX},${newY}) rotate(${currentAngle})`);
+        }
     } else if (isRotating) {
         let angle = startAngle + (evt.clientX - startX) / 2;
         selectedElement.setAttribute("transform", `translate(${currentX},${currentY}) rotate(${angle})`);
