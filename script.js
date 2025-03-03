@@ -59,7 +59,7 @@ function moveInteraction(event) {
     if (!selectedElement) return;
     const isTouch = event.type.startsWith("touch");
     const evt = isTouch ? event.touches[0] : event;
-
+    
     if (isDragging) {
         let dx = evt.clientX - startX;
         let dy = evt.clientY - startY;
